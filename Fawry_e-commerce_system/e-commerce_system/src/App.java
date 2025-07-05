@@ -7,8 +7,6 @@ public class App {
     }
 
     Map<Product, Long> cartItems = cart.getCartItems();
-
-    // 1. Validate all products first
     for (Map.Entry<Product, Long> entry : cartItems.entrySet()) {
         Product p = entry.getKey();
         long quantityInCart = entry.getValue();
@@ -24,11 +22,8 @@ public class App {
             throw new Exception("Insufficient stock for product: " + p.getName());
         }
     }
-
-    // 2. Calculate subtotal
     double subtotal = cart.calcSubTotal();
 
-    // 3. Handle shipping
     List<Shippable> shippingList = cart.getShippableProducts();
     double totalWeight = 0;
 
@@ -49,28 +44,21 @@ public class App {
         }
         System.out.println();
     }
-
-    // 4. Shipping fee (10 per kg)
+    Shipping fee (10 per kg)
     double shippingFee = (totalWeight / 1000.0) * 10;
-
-    // 5. Total cost
     double totalAmount = subtotal + shippingFee;
 
     if (customer.getBalance() < totalAmount) {
         throw new Exception("No enough balance in your wallet");
     }
 
-    // 6. Deduct balance
     customer.subtractFromBalance(totalAmount);
-
-    // 7. Update stock
     for (Map.Entry<Product, Long> entry : cartItems.entrySet()) {
         Product p = entry.getKey();
         long newStock = p.getQuantity() - entry.getValue();
         p.setQuantity(newStock);
     }
 
-    // 8. Print checkout receipt
     System.out.println("** Checkout receipt **");
     for (Map.Entry<Product, Long> entry : cartItems.entrySet()) {
         Product p = entry.getKey();
@@ -84,33 +72,19 @@ public class App {
     System.out.printf("%-18s %.0f\n", "Shipping", shippingFee);
     System.out.printf("%-18s %.0f\n", "Amount", totalAmount);
     System.out.println();
-
-    // 9. Clear the cart
     customer.clearCart();
 }
 
     public static void main(String[] args) throws Exception {
-        try {
-            // 1. Create customer
-            Customer customer = new Customer("Mariem", 1000.0);
-
-            // 2. Create products
+            Customer customer = new Customer("Mariam", 1000.0);
             Expirable_and_shippable cheese = new Expirable_and_shippable("Cheese", 100, 5, LocalDate.now().plusDays(2), 0.2);  // 200g
             Expirable_and_shippable biscuits = new Expirable_and_shippable("Biscuits", 150, 3, LocalDate.now().plusDays(5), 0.7); // 700g
             Product mobileCard = new Product("Mobile Card", 50, 10);  // Not shippable or expirable
-
-            // 3. Add products to cart
             Cart cart = customer.getCart();
             cart.add(cheese, 2);
             cart.add(biscuits, 1);
             cart.add(mobileCard, 1);
-
-            // 4. Checkout
             checkout(customer, cart);
-
-        } catch (Exception e) {
-            System.out.println("Checkout failed: " + e.getMessage());
-        }
     }
 
     
