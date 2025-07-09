@@ -1,7 +1,9 @@
-🛍️ Overview
+#🛍️ Overview
+
 A basic Java-based e-commerce simulation that supports shopping cart operations, product types (shippable, expirable), and checkout logic with shipping fees and stock validation.
 
-🧱 Features
+#🧱 Features
+
 Define products with:
 
 Name, Price, Quantity
@@ -28,7 +30,8 @@ Shipping Service: collects items to be shipped and calculates total weight
 
 Prints formatted receipt on checkout
 
-🧩 Structure
+#🧩 Structure
+
 Product (base class)
 
 ExpirProduct, ShippableProduct, Expirable_and_shippable (extensions)
@@ -39,7 +42,8 @@ Cart (holds product-quantity mapping)
 
 App (handles checkout logic and main)
 
-🚀 How to Run
+#🚀 How to Run
+
 Compile all .java files
 
 Run App.java
