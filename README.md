@@ -1,51 +1,48 @@
-#🛍️ Overview
+# 🛒 Java E-Commerce System
 
-A basic Java-based e-commerce simulation that supports shopping cart operations, product types (shippable, expirable), and checkout logic with shipping fees and stock validation.
+## 📖 Overview
+This is a console-based **Java e-commerce system** that allows customers to shop for different types of products (shippable, expirable, regular), manage their cart, and perform secure checkouts with validations and shipping logic.
 
-#🧱 Features
+---
 
-Define products with:
+## 🧩 Features
 
-Name, Price, Quantity
+- 🛍️ **Product Management**
+  - Each product has a name, price, and quantity
+  - Some products can **expire** (e.g., Cheese, Biscuits)
+  - Some products require **shipping** (e.g., TV, Cheese)
+  - Shipping requires product weight in kg
 
-Optional Expiry (e.g., Cheese, Biscuits)
+- 👤 **Customer Features**
+  - Can add products to their cart (quantity must not exceed stock)
+  - Can view cart contents
+  - Can checkout
 
-Optional Shipping (e.g., TV, Cheese)
+- 💳 **Checkout Process**
+  - Calculates:
+    - Subtotal (sum of price × quantity)
+    - Shipping fee (10 EGP per kg)
+    - Total amount
+  - Validates:
+    - Cart is not empty
+    - Product stock is available
+    - Product is not expired
+    - Customer has enough balance
+  - Shipping notice displays total weight and shipped items
 
-Customer can:
+---
 
-Add items to cart (with stock check)
+## 🧱 Class Structure
 
-Checkout (with subtotal, shipping cost, final amount)
+- `Product` – base class for all product types
+- `ExpirProduct` – extends `Product`, adds expiration logic
+- `Shippable` – interface for products that require shipping
+- `Expirable_and_shippable` – combines expirable and shippable
+- `Customer` – owns cart and balance
+- `Cart` – stores items and quantities
+- `App` – contains the `checkout()` method and `main()` function
 
-Get error if:
+---
 
-Cart is empty
 
-Balance is insufficient
-
-Product is out of stock or expired
-
-Shipping Service: collects items to be shipped and calculates total weight
-
-Prints formatted receipt on checkout
-
-#🧩 Structure
-
-Product (base class)
-
-ExpirProduct, ShippableProduct, Expirable_and_shippable (extensions)
-
-Customer (holds balance and cart)
-
-Cart (holds product-quantity mapping)
-
-App (handles checkout logic and main)
-
-#🚀 How to Run
-
-Compile all .java files
-
-Run App.java
-
-![Screenshot 2025-07-09 034249](https://github.com/user-attachments/assets/f0768f89-b746-472c-99b5-ffd2c6c0289d)
+![Screenshot 2025-07-09 034249](https://github.com/user-attachments/assets/8bc9fcd8-2112-409e-a31e-dd302e951add)
